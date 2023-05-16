@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    header {
+        @apply w-full max-w-5xl mx-auto flex items-center justify-between pt-8 lg:pt-12 py-4;
+    }
+
+    main {
+        @apply flex flex-col justify-center items-center flex-1;
+    }
+
+    footer {
+        @apply mt-auto text-center pt-4 pb-8;
+    }
+}
+@layer components {
+    .btn {
+        @apply w-1/2 py-2 rounded-md;
+    }
+
+    .btn--blue {
+        @apply bg-blue-300 hover:bg-blue-400 text-white-300;
+    }
+
+    .btn--dark-blue {
+        @apply bg-dark-blue-300 hover:bg-dark-blue-400 dark:bg-white-300 dark:hover:bg-white-400 text-white-300 dark:text-dark-blue-400;
+    }
+
+    .answer-input {
+        @apply bg-white-400 dark:bg-dark-blue-400 w-full rounded-md p-4 mt-2 mb-3 text-center outline-none;
+    }
+}
+
+.btn-wrapper {
+    @apply w-full max-w-lg flex space-x-3;
+}
