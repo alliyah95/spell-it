@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ThemeContext } from "../store/theme";
-import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
+import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
 
 const ThemeToggleButton: React.FC = () => {
     const themeCtx = useContext(ThemeContext);
@@ -29,9 +29,9 @@ const ThemeToggleButton: React.FC = () => {
                 }`}
             >
                 {themeCtx.mode === "light" ? (
-                    <SunIcon className="h-6" />
+                    <BsFillSunFill className="h-8" />
                 ) : (
-                    <MoonIcon className="h-6" />
+                    <BsMoonFill className="h-8" />
                 )}
             </div>
         </button>

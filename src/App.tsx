@@ -1,6 +1,6 @@
 import React from "react";
 import HighestScore from "./components/HighestScore";
-import ThemeToggleButton from "./components/ThemeToggleButtton";
+import ThemeToggleButton from "./components/ThemeToggleButton";
 import Title from "./components/Title";
 import Input from "./components/Input";
 import CurrentScore from "./components/CurrentScore";
