@@ -33,7 +33,7 @@
     }
 
     .voice-player {
-        @apply flex justify-center items-center bg-blue-300 w-28 h-28 lg:h-32 lg:w-32 rounded-full mt-6 mb-12 text-white-400;
+        @apply flex justify-center items-center bg-blue-300 w-28 h-28 lg:h-32 lg:w-32 rounded-full mt-6 mb-8 text-white-400;
     }
 }
 
@@ -41,4 +41,14 @@
     .btn-wrapper {
         @apply w-full max-w-lg flex space-x-3;
     }
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s;
 }

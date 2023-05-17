@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from "react";
 import { GameContext } from "../../store/game";
 
-const Input: React.FC = () => {
+const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
     const answerRef = useRef<HTMLInputElement | null>(null);
     const game = useContext(GameContext);
 
@@ -12,14 +12,21 @@ const Input: React.FC = () => {
             answerRef.current.value = "";
 
             if (isCorrect) {
-                game.newWord();
+                onCheck("Correct!");
+                setTimeout(() => {
+                    game.newWord();
+                }, 1000);
+            } else {
+                onCheck("Incorrect!");
             }
         }
     };
 
     const passHandler = (): void => {
-        alert("The correct answer was " + game.word);
-        game.newWord();
+        onCheck("The correct answer was " + game.word);
+        setTimeout(() => {
+            game.newWord();
+        }, 1000);
     };
 
     return (

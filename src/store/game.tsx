@@ -28,7 +28,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     const [word, setWord] = useState<string>("");
     const [wordPlayed, setWordPlayed] = useState<boolean>(false);
     const [score, setScore] = useState<number>(0);
-    const { speak, voices, speaking } = useSpeechSynthesis();
+    const { speak, speaking } = useSpeechSynthesis();
 
     // TODO
     // 1. handle error state
@@ -64,10 +64,8 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     const answerHandler = (answer: string): boolean => {
         if (answer.toLowerCase().trim() === word.toLowerCase().trim()) {
             setScore(score + 1);
-            alert("correct!");
             return true;
         }
-        alert("wrong!");
         return false;
     };
 
