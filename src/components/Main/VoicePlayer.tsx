@@ -12,6 +12,7 @@ const VoicePlayer: React.FC<{ onStart: () => void }> = ({ onStart }) => {
         onStart();
         setHideStartBtn(true);
         setIsLoading(true);
+        game.startGame();
         game.newWord();
     };
 

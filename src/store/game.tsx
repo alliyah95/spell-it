@@ -7,6 +7,8 @@ type Game = {
     word: string;
     wordPlayed: boolean;
     speaking: boolean;
+    gameStarted: boolean;
+    startGame: () => void;
     newWord: () => void;
     playWord: () => void;
     checkAnswer: (answer: string) => boolean;
@@ -17,6 +19,8 @@ export const GameContext = React.createContext<Game>({
     word: "",
     wordPlayed: false,
     speaking: false,
+    gameStarted: false,
+    startGame: () => {},
     newWord: () => {},
     playWord: () => {},
     checkAnswer: () => true,
@@ -28,6 +32,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     const [word, setWord] = useState<string>("");
     const [wordPlayed, setWordPlayed] = useState<boolean>(false);
     const [score, setScore] = useState<number>(0);
+    const [gameStarted, setGameStarted] = useState<boolean>(false);
     const { speak, speaking } = useSpeechSynthesis();
 
     // TODO
@@ -69,11 +74,17 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
         return false;
     };
 
+    const gameStartHandler = (): void => {
+        setGameStarted(true);
+    };
+
     const gameContextvalue: Game = {
         score,
         word,
         wordPlayed,
         speaking,
+        gameStarted,
+        startGame: gameStartHandler,
         newWord: newWordHandler,
         playWord: playHandler,
         checkAnswer: answerHandler,
