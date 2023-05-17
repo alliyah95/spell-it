@@ -5,13 +5,11 @@ import Spinner from "../UI/Spinner";
 
 const VoicePlayer: React.FC<{ onStart: () => void }> = ({ onStart }) => {
     const [hideStartBtn, setHideStartBtn] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
     const game = useContext(GameContext);
 
     const gameStartHandler = async (): Promise<void> => {
         onStart();
         setHideStartBtn(true);
-        setIsLoading(true);
         game.startGame();
         game.newWord();
     };
@@ -32,7 +30,7 @@ const VoicePlayer: React.FC<{ onStart: () => void }> = ({ onStart }) => {
             )}
 
             {hideStartBtn &&
-                isLoading &&
+                game.loading &&
                 !game.speaking &&
                 !game.wordPlayed && <Spinner />}
 
