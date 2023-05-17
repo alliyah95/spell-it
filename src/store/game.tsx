@@ -5,6 +5,8 @@ import axios from "axios";
 type Game = {
     score: number;
     word: string;
+    wordPlayed: boolean;
+    speaking: boolean;
     newWord: () => void;
     playWord: () => void;
     checkAnswer: (answer: string) => boolean;
@@ -13,6 +15,8 @@ type Game = {
 export const GameContext = React.createContext<Game>({
     score: 0,
     word: "",
+    wordPlayed: false,
+    speaking: false,
     newWord: () => {},
     playWord: () => {},
     checkAnswer: () => true,
@@ -22,8 +26,9 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     props
 ) => {
     const [word, setWord] = useState<string>("");
+    const [wordPlayed, setWordPlayed] = useState<boolean>(false);
     const [score, setScore] = useState<number>(0);
-    const { speak, voices } = useSpeechSynthesis();
+    const { speak, voices, speaking } = useSpeechSynthesis();
 
     // TODO
     // 1. handle error state
@@ -41,12 +46,18 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     };
 
     const playHandler = (): void => {
-        speak({ text: word, voice: voices[4], rate: 1 });
+        speak({
+            text: word,
+            rate: 0.8,
+        });
+
+        if (word) {
+            setWordPlayed(true);
+        }
     };
 
-    // whenever the word changes, we play it
+    // whenever the word changes, automatically play it
     useEffect(() => {
-        console.log("new word: " + word);
         playHandler();
     }, [word]);
 
@@ -63,6 +74,8 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     const gameContextvalue: Game = {
         score,
         word,
+        wordPlayed,
+        speaking,
         newWord: newWordHandler,
         playWord: playHandler,
         checkAnswer: answerHandler,

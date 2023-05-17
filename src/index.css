@@ -16,6 +16,10 @@
     }
 }
 @layer components {
+    .answer-input {
+        @apply bg-white-400 dark:bg-dark-blue-400 w-full rounded-md p-4 mt-2 mb-3 text-center outline-none;
+    }
+
     .btn {
         @apply w-1/2 py-2 rounded-md;
     }
@@ -28,11 +32,13 @@
         @apply bg-dark-blue-300 hover:bg-dark-blue-400 dark:bg-white-300 dark:hover:bg-white-400 text-white-300 dark:text-dark-blue-400;
     }
 
-    .answer-input {
-        @apply bg-white-400 dark:bg-dark-blue-400 w-full rounded-md p-4 mt-2 mb-3 text-center outline-none;
+    .voice-player {
+        @apply flex justify-center items-center bg-blue-300 w-28 h-28 lg:h-32 lg:w-32 rounded-full mt-6 mb-12 text-white-400;
     }
 }
 
-.btn-wrapper {
-    @apply w-full max-w-lg flex space-x-3;
+@layer utilities {
+    .btn-wrapper {
+        @apply w-full max-w-lg flex space-x-3;
+    }
 }

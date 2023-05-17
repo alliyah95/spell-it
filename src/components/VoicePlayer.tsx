@@ -1,25 +1,46 @@
 import React, { useState, useContext } from "react";
+import { BsArrowClockwise, BsVolumeUpFill } from "react-icons/bs";
 import { GameContext } from "../store/game";
+import Spinner from "./Spinner";
 
 const VoicePlayer: React.FC = () => {
     const [hideStartBtn, setHideStartBtn] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const game = useContext(GameContext);
 
-    // start the game
-    // this will subsequently hide the start button
     const gameStartHandler = async (): Promise<void> => {
         setHideStartBtn(true);
+        setIsLoading(true);
         game.newWord();
     };
 
+    const replayHandler = (): void => {
+        game.playWord();
+    };
+
     return (
-        <div className="flex justify-center items-center bg-blue-300 w-28 h-28 lg:h-32 lg:w-32 rounded-full mt-6 mb-12">
+        <div className="voice-player">
             {!hideStartBtn && (
                 <button
                     onClick={gameStartHandler}
-                    className="font-bold text-xl text-white-400"
+                    className="font-bold text-2xl"
                 >
                     start
+                </button>
+            )}
+
+            {hideStartBtn &&
+                isLoading &&
+                !game.speaking &&
+                !game.wordPlayed && <Spinner />}
+
+            {hideStartBtn && game.speaking && (
+                <BsVolumeUpFill className="text-3xl" />
+            )}
+
+            {hideStartBtn && game.wordPlayed && !game.speaking && (
+                <button onClick={replayHandler} className="text-3xl">
+                    <BsArrowClockwise />
                 </button>
             )}
         </div>
