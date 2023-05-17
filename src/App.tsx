@@ -10,7 +10,7 @@ import {
 } from "./components/index";
 
 const App: React.FC = () => {
-    const [status, setStatus] = useState<string>("type your answer here 👇");
+    const [status, setStatus] = useState<string>("Type your answers here 👇");
     const [statusKey, setStatusKey] = useState<number>(0);
     const [animate, setAnimate] = useState<boolean>(false);
 

@@ -2,18 +2,17 @@ import React, { useContext, useRef } from "react";
 import { GameContext } from "../../store/game";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import Button from "../UI/Button";
 
 const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
     const answerRef = useRef<HTMLInputElement | null>(null);
     const game = useContext(GameContext);
 
-    const checkHandler = (): void => {
+    const checkHandler = (evt: React.FormEvent): void => {
+        evt.preventDefault();
         if (answerRef.current && game.gameStarted) {
             const isCorrect = game.checkAnswer(answerRef.current.value);
             answerRef.current.value = "";
             answerRef.current.focus();
-
             if (isCorrect) {
                 onCheck("Correct!");
                 setTimeout(() => {
@@ -36,38 +35,37 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
         }
     };
 
-    const submitHandler = (evt: React.FormEvent): void => {
-        evt.preventDefault();
-        checkHandler();
-    };
-
     return (
-        <form className="w-full max-w-lg mx-auto" onSubmit={submitHandler}>
+        <form className="w-full max-w-lg mx-auto" onSubmit={checkHandler}>
             <input type="text" className="answer-input" ref={answerRef} />
             <div className="btn-wrapper">
-                <Button
+                <button
                     id="pass-btn"
-                    content="Pass"
-                    classes={`btn btn--dark-blue ${
+                    className={`btn btn--dark-blue ${
                         !game.gameStarted ? "cursor-not-allowed" : ""
                     }`}
-                    tooltipContent="Start first!"
-                    tooltipPosition="top"
-                    handler={passHandler}
-                    kind="button"
-                />
+                    type="button"
+                    data-tooltip-id="pass-btn"
+                    data-tooltip-content="Start first!"
+                    data-tooltip-place="top"
+                    onClick={passHandler}
+                >
+                    Pass
+                </button>
 
-                <Button
+                <button
                     id="check-btn"
-                    content="Check"
-                    classes={`btn btn--blue ${
+                    className={`btn btn--blue ${
                         !game.gameStarted ? "cursor-not-allowed" : ""
                     }`}
-                    tooltipContent="Start first!"
-                    tooltipPosition="top"
-                    handler={checkHandler}
-                    kind="submit"
-                />
+                    type="submit"
+                    data-tooltip-id="check-btn"
+                    data-tooltip-content="Start first!"
+                    data-tooltip-place="top"
+                    onClick={checkHandler}
+                >
+                    Check
+                </button>
 
                 {!game.gameStarted && (
                     <>
