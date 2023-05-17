@@ -1,10 +1,12 @@
 import React from "react";
-import HighestScore from "./components/HighestScore";
-import ThemeToggleButton from "./components/ThemeToggleButton";
-import Title from "./components/Title";
-import Input from "./components/Input";
-import CurrentScore from "./components/CurrentScore";
-import VoicePlayer from "./components/VoicePlayer";
+import {
+    Input,
+    VoicePlayer,
+    CurrentScore,
+    HighestScore,
+    ThemeToggleButton,
+    Title,
+} from "./components/index";
 
 const App: React.FC = () => {
     return (

@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-import { GameContext } from "../store/game";
+import { GameContext } from "../../store/game";
 
 const Input: React.FC = () => {
     const answerRef = useRef<HTMLInputElement | null>(null);

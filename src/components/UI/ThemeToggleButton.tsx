@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { ThemeContext } from "../store/theme";
+import { ThemeContext } from "../../store/theme";
 import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
 
 const ThemeToggleButton: React.FC = () => {

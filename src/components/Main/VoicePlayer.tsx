@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { BsArrowClockwise, BsVolumeUpFill } from "react-icons/bs";
-import { GameContext } from "../store/game";
-import Spinner from "./Spinner";
+import { GameContext } from "../../store/game";
+import Spinner from "../UI/Spinner";
 
 const VoicePlayer: React.FC = () => {
     const [hideStartBtn, setHideStartBtn] = useState<boolean>(false);
