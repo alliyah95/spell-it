@@ -45,7 +45,7 @@ const CustomSlider: React.FC<SliderProps> = ({
 
     return (
         <div>
-            <h3 className="text-start text-dark-blue-400 dark:text-white-300">
+            <h3 className="text-start text-dark-blue-400 dark:text-white-300 text-sm md:text-base">
                 {name}: {value}
             </h3>
             <div className="bg-white-400 p-4 rounded-md mt-2">
