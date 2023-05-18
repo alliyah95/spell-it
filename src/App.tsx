@@ -36,7 +36,7 @@ const App: React.FC = () => {
     };
 
     return (
-        <div className="w-[85%] mx-auto h-screen text-dark-blue-300 dark:text-white-300 flex flex-col justify-center">
+        <div className="w-[85%] mx-auto min-h-screen text-dark-blue-300 dark:text-white-300 flex flex-col justify-center">
             {showSettings && <Settings closeHandler={settingsHandler} />}
             <header>
                 <HighestScore />

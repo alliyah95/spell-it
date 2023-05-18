@@ -17,6 +17,7 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
 
     const checkHandler = (evt: React.FormEvent): void => {
         evt.preventDefault();
+
         if (answerRef.current && game.gameStarted) {
             const isCorrect = game.checkAnswer(answerRef.current.value);
             answerRef.current.value = "";
@@ -46,7 +47,18 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
 
     return (
         <form className="w-full max-w-lg mx-auto" onSubmit={checkHandler}>
-            <input type="text" className="answer-input" ref={answerRef} />
+            <input
+                type="text"
+                className={`answer-input ${
+                    !game.gameStarted ? "cursor-not-allowed" : ""
+                }`}
+                id="answer-input"
+                ref={answerRef}
+                data-tooltip-id="answer-input"
+                data-tooltip-content="Start first!"
+                data-tooltip-place="top"
+                readOnly={!game.gameStarted}
+            />
             <div className="btn-wrapper">
                 <button
                     id="pass-btn"
@@ -78,11 +90,11 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
 
                 {!game.gameStarted && (
                     <>
-                        {["pass-btn", "check-btn"].map((id) => (
+                        {["pass-btn", "check-btn", "answer-input"].map((id) => (
                             <Tooltip
                                 key={id}
                                 id={id}
-                                className="bg-dark-blue-400 dark:bg-white-300 dark:text-dark-blue-400"
+                                className="bg-dark-blue-400 dark:bg-white-300 dark:text-dark-blue-400 opacity-100"
                             />
                         ))}
                     </>
