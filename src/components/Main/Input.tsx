@@ -1,11 +1,19 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { GameContext } from "../../store/game";
+import { HighestScoreContext } from "../../store/highest-score";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
 const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
     const answerRef = useRef<HTMLInputElement | null>(null);
     const game = useContext(GameContext);
+    const highestScore = useContext(HighestScoreContext);
+
+    useEffect(() => {
+        if (game.score > highestScore.value) {
+            highestScore.setNewHighestScore(game.score);
+        }
+    }, [game.score, highestScore.value]);
 
     const checkHandler = (evt: React.FormEvent): void => {
         evt.preventDefault();
@@ -13,6 +21,7 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
             const isCorrect = game.checkAnswer(answerRef.current.value);
             answerRef.current.value = "";
             answerRef.current.focus();
+
             if (isCorrect) {
                 onCheck("Correct!");
                 setTimeout(() => {

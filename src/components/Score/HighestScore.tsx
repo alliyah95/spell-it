@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { HighestScoreContext } from "../../store/highest-score";
 
 const Header: React.FC = () => {
-    return <p>Highest score: 5</p>;
+    const highestScore = useContext(HighestScoreContext);
+
+    return <p>Highest score: {highestScore.value}</p>;
 };
 
 export default Header;

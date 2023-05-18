@@ -73,6 +73,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
             setScore(score + 1);
             return true;
         }
+
         return false;
     };
 
