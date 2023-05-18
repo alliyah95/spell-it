@@ -1,4 +1,5 @@
 import Input from "./Main/Input";
+import Settings from "./Main/Settings";
 import VoicePlayer from "./Main/VoicePlayer";
 import CurrentScore from "./Score/CurrentScore";
 import HighestScore from "./Score/HighestScore";
@@ -9,6 +10,7 @@ import Title from "./UI/Title";
 
 export {
     Input,
+    Settings,
     VoicePlayer,
     CurrentScore,
     HighestScore,

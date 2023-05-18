@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 import axios from "axios";
 
+type Settings = {
+    wordLength: [number, number];
+    voice: number;
+    speed: number;
+};
+
 type Game = {
     score: number;
     word: string;
@@ -9,6 +15,7 @@ type Game = {
     speaking: boolean;
     gameStarted: boolean;
     loading: boolean;
+    settings: Settings;
     startGame: () => void;
     newWord: () => void;
     playWord: () => void;
@@ -22,6 +29,7 @@ export const GameContext = React.createContext<Game>({
     speaking: false,
     gameStarted: false,
     loading: false,
+    settings: { wordLength: [3, 10], voice: 0, speed: 0.8 },
     startGame: () => {},
     newWord: () => {},
     playWord: () => {},
@@ -35,6 +43,11 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     const [wordPlayed, setWordPlayed] = useState<boolean>(false);
     const [score, setScore] = useState<number>(0);
     const [gameStarted, setGameStarted] = useState<boolean>(false);
+    const [settings, setSettings] = useState<Settings>({
+        wordLength: [4, 10],
+        voice: 0,
+        speed: 1,
+    });
     const [loading, setLoading] = useState<boolean>(false);
     const { speak, speaking } = useSpeechSynthesis();
 
@@ -89,6 +102,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
         speaking,
         gameStarted,
         loading,
+        settings,
         startGame: gameStartHandler,
         newWord: newWordHandler,
         playWord: playHandler,

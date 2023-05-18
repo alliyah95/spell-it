@@ -32,6 +32,10 @@
         @apply bg-dark-blue-300 hover:bg-dark-blue-400 dark:bg-white-300 dark:hover:bg-white-400 text-white-300 dark:text-dark-blue-400;
     }
 
+    .modal {
+        @apply w-[85%] max-w-lg mx-auto bg-white-300 dark:bg-dark-blue-300 p-6 rounded-md fade-in;
+    }
+
     .voice-player {
         @apply flex justify-center items-center bg-blue-300 w-28 h-28 lg:h-32 lg:w-32 rounded-full mt-6 mb-8 text-white-400;
     }
@@ -41,8 +45,15 @@
     .btn-wrapper {
         @apply w-full max-w-lg flex space-x-3;
     }
+
+    .backdrop {
+        @apply fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-50 flex justify-center items-center;
+    }
 }
 
+#root {
+    @apply bg-white-300 dark:bg-dark-blue-300;
+}
 .fade-in {
     opacity: 1;
     transition: opacity 1s;
