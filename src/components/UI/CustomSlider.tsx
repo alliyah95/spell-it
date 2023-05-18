@@ -8,6 +8,8 @@ interface SliderProps {
     step: number;
     defaultValue: number;
     name: string;
+    value: number;
+    changeHandler: (value: number) => void;
 }
 
 const CustomSlider: React.FC<SliderProps> = ({
@@ -16,11 +18,11 @@ const CustomSlider: React.FC<SliderProps> = ({
     step,
     defaultValue,
     name,
+    value,
+    changeHandler,
 }) => {
-    const [sliderValue, setSliderValue] = useState<number>(1);
-
-    const changeHandler = (value: number): void => {
-        setSliderValue(value);
+    const generalChangeHandler = (value: number): void => {
+        changeHandler(value);
     };
 
     const handleStyle = {
@@ -44,7 +46,7 @@ const CustomSlider: React.FC<SliderProps> = ({
     return (
         <div>
             <h3 className="text-start text-dark-blue-400 dark:text-white-300">
-                {name}: {sliderValue}
+                {name}: {value}
             </h3>
             <div className="bg-white-400 p-4 rounded-md mt-2">
                 <Slider
@@ -52,7 +54,8 @@ const CustomSlider: React.FC<SliderProps> = ({
                     max={max}
                     step={step}
                     defaultValue={defaultValue}
-                    onChange={changeHandler}
+                    value={value}
+                    onChange={generalChangeHandler}
                     handleStyle={handleStyle}
                     trackStyle={trackStyle}
                     railStyle={railStyle}

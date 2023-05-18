@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 import axios from "axios";
+import { generateRandomNum } from "../utils/game";
 
 type Settings = {
     wordLength: [number, number];
     voice: number;
     speed: number;
+};
+
+type Setting = {
+    [settingType: string]: number | number[];
 };
 
 type Game = {
@@ -20,6 +25,7 @@ type Game = {
     newWord: () => void;
     playWord: () => void;
     checkAnswer: (answer: string) => boolean;
+    modifySettings: (setting: Setting) => void;
 };
 
 export const GameContext = React.createContext<Game>({
@@ -34,6 +40,7 @@ export const GameContext = React.createContext<Game>({
     newWord: () => {},
     playWord: () => {},
     checkAnswer: () => true,
+    modifySettings: () => {},
 });
 
 export const GameProvider: React.FC<{ children: React.ReactNode }> = (
@@ -43,21 +50,28 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     const [wordPlayed, setWordPlayed] = useState<boolean>(false);
     const [score, setScore] = useState<number>(0);
     const [gameStarted, setGameStarted] = useState<boolean>(false);
-    const [settings, setSettings] = useState<Settings>({
-        wordLength: [4, 10],
-        voice: 0,
-        speed: 1,
+    const [settings, setSettings] = useState<Settings>(() => {
+        const storedSettings = localStorage.getItem("settings");
+        return storedSettings
+            ? JSON.parse(storedSettings)
+            : {
+                  wordLength: [4, 10],
+                  voice: 0,
+                  speed: 1,
+              };
     });
     const [loading, setLoading] = useState<boolean>(false);
     const { speak, speaking } = useSpeechSynthesis();
 
-    // TODO
-    // 1. handle error state
-    // 2. change length of word according to user preference
     const newWordHandler = async (): Promise<void> => {
+        const length = generateRandomNum(
+            settings.wordLength[0],
+            settings.wordLength[1]
+        );
+
         try {
             const response = await axios.get(
-                "https://random-word-api.herokuapp.com/word?length=10"
+                `https://random-word-api.herokuapp.com/word?length=${length}`
             );
             const data = response.data;
             setWord(data[0]);
@@ -69,7 +83,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     const playHandler = (): void => {
         speak({
             text: word,
-            rate: 0.8,
+            rate: settings.speed,
         });
         if (word) {
             setWordPlayed(true);
@@ -95,6 +109,15 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
         setLoading(true);
     };
 
+    const settingsHandler = (setting: Setting): void => {
+        const [settingType, value] = Object.entries(setting)[0];
+        setSettings((currentSettings) => {
+            const newSettings = { ...currentSettings, [settingType]: value };
+            localStorage.setItem("settings", JSON.stringify(newSettings));
+            return newSettings;
+        });
+    };
+
     const gameContextvalue: Game = {
         score,
         word,
@@ -107,6 +130,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
         newWord: newWordHandler,
         playWord: playHandler,
         checkAnswer: answerHandler,
+        modifySettings: settingsHandler,
     };
 
     return (
