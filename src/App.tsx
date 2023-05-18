@@ -56,14 +56,23 @@ const App: React.FC = () => {
             </main>
             <footer>
                 <button
-                    className="underline mb-8"
+                    className="underline mb-8 hover:text-blue-300"
                     onClick={() => {
                         setShowSettings(true);
                     }}
                 >
                     Settings
                 </button>
-                <p>Made with 💙 by Alliyah Joyce Sarip</p>
+                <p>
+                    Made with 💙 by{" "}
+                    <a
+                        href="https://github.com/alliyah95"
+                        target="_blank"
+                        className="dev-info"
+                    >
+                        Alliyah Joyce Sarip
+                    </a>
+                </p>
             </footer>
         </div>
     );

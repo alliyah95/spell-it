@@ -49,6 +49,10 @@
     .backdrop {
         @apply fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-50 flex justify-center items-center;
     }
+
+    .dev-info {
+        @apply hover:text-blue-300;
+    }
 }
 
 #root {
