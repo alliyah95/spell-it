@@ -4,7 +4,7 @@
 
 </div>
 
-![image](https://github.com/alliyah95/spell-it/assets/74038500/0b81882b-eb16-46a0-8e56-3a0832810e94)
+![image](https://github.com/alliyah95/spell-it/assets/74038500/9ff1a358-8c95-4524-b96a-14f88a738bf8)
 
 ## About
 
