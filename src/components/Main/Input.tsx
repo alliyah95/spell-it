@@ -63,13 +63,16 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
                 <button
                     id="pass-btn"
                     className={`btn btn--dark-blue ${
-                        !game.gameStarted ? "cursor-not-allowed" : ""
+                        !game.gameStarted || !game.word
+                            ? "cursor-not-allowed"
+                            : ""
                     }`}
                     type="button"
                     data-tooltip-id="pass-btn"
                     data-tooltip-content="Start first!"
                     data-tooltip-place="top"
                     onClick={passHandler}
+                    disabled={!game.word}
                 >
                     Pass
                 </button>
@@ -77,7 +80,9 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
                 <button
                     id="check-btn"
                     className={`btn btn--blue ${
-                        !game.gameStarted ? "cursor-not-allowed" : ""
+                        !game.gameStarted || !game.word
+                            ? "cursor-not-allowed"
+                            : ""
                     }`}
                     type="submit"
                     data-tooltip-id="check-btn"

@@ -30,7 +30,7 @@ const Settings: React.FC<SettingsProps> = ({ closeHandler }) => {
         if (value < minLength) {
             newMaxLength = minLength;
         } else {
-            newMaxLength = maxLength;
+            newMaxLength = value;
         }
 
         setMaxLength(newMaxLength);
@@ -70,7 +70,7 @@ const Settings: React.FC<SettingsProps> = ({ closeHandler }) => {
                     />
                     <CustomSlider
                         name="Maximum word length"
-                        min={1}
+                        min={minLength}
                         max={10}
                         step={1}
                         defaultValue={10}
