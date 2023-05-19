@@ -72,7 +72,6 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
                     data-tooltip-content="Start first!"
                     data-tooltip-place="top"
                     onClick={passHandler}
-                    disabled={!game.word}
                 >
                     Pass
                 </button>
