@@ -21,6 +21,7 @@ type Game = {
     gameStarted: boolean;
     loading: boolean;
     settings: Settings;
+    supported: boolean;
     startGame: () => void;
     newWord: () => void;
     playWord: () => void;
@@ -36,6 +37,7 @@ export const GameContext = React.createContext<Game>({
     gameStarted: false,
     loading: false,
     settings: { wordLength: [3, 10], voice: 0, speed: 0.8 },
+    supported: true,
     startGame: () => {},
     newWord: () => {},
     playWord: () => {},
@@ -61,7 +63,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
               };
     });
     const [loading, setLoading] = useState<boolean>(false);
-    const { speak, speaking } = useSpeechSynthesis();
+    const { speak, speaking, supported } = useSpeechSynthesis();
 
     const newWordHandler = async (): Promise<void> => {
         const length = generateRandomNum(
@@ -126,6 +128,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
         gameStarted,
         loading,
         settings,
+        supported,
         startGame: gameStartHandler,
         newWord: newWordHandler,
         playWord: playHandler,

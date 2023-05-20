@@ -7,6 +7,7 @@ import Spinner from "./UI/Spinner";
 import Status from "./UI/Status";
 import ThemeToggleButton from "./UI/ThemeToggleButton";
 import Title from "./UI/Title";
+import Unsupported from "./UI/Unsupported";
 
 export {
     Input,
@@ -18,4 +19,5 @@ export {
     Status,
     ThemeToggleButton,
     Title,
+    Unsupported,
 };
