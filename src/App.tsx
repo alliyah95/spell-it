@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { GameContext } from "./store/game";
 import {
     Input,
@@ -17,7 +17,20 @@ const App: React.FC = () => {
     const [statusKey, setStatusKey] = useState<number>(0);
     const [animate, setAnimate] = useState<boolean>(false);
     const [showSettings, setShowSettings] = useState<boolean>(false);
+    const [isUnsupported, setIsUnsupported] = useState<boolean>(false);
     const game = useContext(GameContext);
+
+    useEffect(() => {
+        const userAgent = window.navigator.userAgent;
+        const isIOS =
+            /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
+        const isMac = /Macintosh/.test(userAgent);
+
+        if (isIOS || isMac) {
+            setIsUnsupported(true);
+        } else {
+        }
+    }, []);
 
     const updateStatus = (): void => {
         setStatusKey(statusKey + 1);
@@ -47,7 +60,7 @@ const App: React.FC = () => {
             </header>
             <main>
                 <Title />
-                {!game.supported && <Unsupported />}
+                {(!game.supported || isUnsupported) && <Unsupported />}
                 {game.supported && (
                     <>
                         <CurrentScore />
