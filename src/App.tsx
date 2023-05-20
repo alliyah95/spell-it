@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { GameContext } from "./store/game";
 import {
     Input,
     Settings,
@@ -8,6 +9,7 @@ import {
     Status,
     ThemeToggleButton,
     Title,
+    Unsupported,
 } from "./components/index";
 
 const App: React.FC = () => {
@@ -15,6 +17,7 @@ const App: React.FC = () => {
     const [statusKey, setStatusKey] = useState<number>(0);
     const [animate, setAnimate] = useState<boolean>(false);
     const [showSettings, setShowSettings] = useState<boolean>(false);
+    const game = useContext(GameContext);
 
     const updateStatus = (): void => {
         setStatusKey(statusKey + 1);
@@ -44,25 +47,33 @@ const App: React.FC = () => {
             </header>
             <main>
                 <Title />
-                <CurrentScore />
-                <VoicePlayer onStart={startHandler} />
-                <Status
-                    text={status}
-                    index={statusKey}
-                    animate={animate}
-                    key={statusKey}
-                />
-                <Input onCheck={statusHandler} />
+                {!game.supported && <Unsupported />}
+                {game.supported && (
+                    <>
+                        <CurrentScore />
+                        <VoicePlayer onStart={startHandler} />
+                        <Status
+                            text={status}
+                            index={statusKey}
+                            animate={animate}
+                            key={statusKey}
+                        />
+                        <Input onCheck={statusHandler} />
+                    </>
+                )}
             </main>
             <footer>
-                <button
-                    className="underline mb-8 hover:text-blue-300"
-                    onClick={() => {
-                        setShowSettings(true);
-                    }}
-                >
-                    Settings
-                </button>
+                {game.supported && (
+                    <button
+                        className="underline mb-8 hover:text-blue-300"
+                        onClick={() => {
+                            setShowSettings(true);
+                        }}
+                    >
+                        Settings
+                    </button>
+                )}
+
                 <p>
                     Made with 💙 by{" "}
                     <a
