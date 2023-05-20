@@ -17,7 +17,7 @@ const App: React.FC = () => {
     const [statusKey, setStatusKey] = useState<number>(0);
     const [animate, setAnimate] = useState<boolean>(false);
     const [showSettings, setShowSettings] = useState<boolean>(false);
-    const [isUnsupported, setIsUnsupported] = useState<boolean>(false);
+    const [isApple, setIsApple] = useState<boolean>(false);
     const game = useContext(GameContext);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const App: React.FC = () => {
         const isMac = /Macintosh/.test(userAgent);
 
         if (isIOS || isMac) {
-            setIsUnsupported(true);
+            setIsApple(true);
         } else {
         }
     }, []);
@@ -60,8 +60,8 @@ const App: React.FC = () => {
             </header>
             <main>
                 <Title />
-                {(!game.supported || isUnsupported) && <Unsupported />}
-                {game.supported && (
+                {(!game.supported || isApple) && <Unsupported />}
+                {game.supported && !isApple && (
                     <>
                         <CurrentScore />
                         <VoicePlayer onStart={startHandler} />
@@ -76,7 +76,7 @@ const App: React.FC = () => {
                 )}
             </main>
             <footer>
-                {game.supported && (
+                {game.supported && !isApple && (
                     <button
                         className="underline mb-8 hover:text-blue-300"
                         onClick={() => {
