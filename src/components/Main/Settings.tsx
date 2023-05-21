@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import CustomSlider from "../UI/CustomSlider";
+import Voices from "./Voices";
 import { GameContext } from "../../store/game";
 import { BsXLg } from "react-icons/bs";
 
@@ -16,6 +17,9 @@ const Settings: React.FC<SettingsProps> = ({ closeHandler }) => {
         game.settings.wordLength[1]
     );
     const [speed, setSpeed] = useState<number>(game.settings.speed);
+    const [voiceIndex, setVoiceIndex] = useState<number>(
+        game.settings.voiceIndex
+    );
 
     const minLengthHandler = (value: number) => {
         setMinLength(value);
@@ -43,6 +47,13 @@ const Settings: React.FC<SettingsProps> = ({ closeHandler }) => {
         setSpeed(value);
         game.modifySettings({
             speed: value,
+        });
+    };
+
+    const voiceIndexHandler = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+        setVoiceIndex(parseInt(evt.target.value));
+        game.modifySettings({
+            voiceIndex: parseInt(evt.target.value),
         });
     };
 
@@ -85,6 +96,11 @@ const Settings: React.FC<SettingsProps> = ({ closeHandler }) => {
                         defaultValue={1}
                         changeHandler={speedHandler}
                         value={speed}
+                    />
+                    <Voices
+                        list={game.voices}
+                        index={voiceIndex}
+                        handler={voiceIndexHandler}
                     />
                 </div>
             </div>
