@@ -58,7 +58,7 @@ const Settings: React.FC<SettingsProps> = ({ closeHandler }) => {
     };
 
     return (
-        <div className="backdrop" onClick={closeHandler}>
+        <div className="backdrop">
             <div className="modal fade-in-up">
                 <div className="flex justify-between mb-2">
                     <h3 className="font-black dark:text-white-300 text-2xl">
