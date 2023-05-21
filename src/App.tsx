@@ -28,7 +28,6 @@ const App: React.FC = () => {
 
         if (isIOS || isMac) {
             setIsApple(true);
-        } else {
         }
     }, []);
 
