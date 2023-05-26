@@ -9,7 +9,7 @@ import {
     Status,
     ThemeToggleButton,
     Title,
-    Unsupported,
+    ErrorMessage,
 } from "./components/index";
 
 const App: React.FC = () => {
@@ -59,8 +59,8 @@ const App: React.FC = () => {
             </header>
             <main>
                 <Title />
-                {(!game.supported || isApple) && <Unsupported />}
-                {game.supported && !isApple && (
+
+                {!game.error && game.supported && !isApple && (
                     <>
                         <CurrentScore />
                         <VoicePlayer onStart={startHandler} />
@@ -73,9 +73,20 @@ const App: React.FC = () => {
                         <Input onCheck={statusHandler} />
                     </>
                 )}
+
+                {(!game.supported || isApple) && (
+                    <ErrorMessage message="Oh no! Your browser or device is currently not supported by the app😔." />
+                )}
+
+                {game.error && (
+                    <ErrorMessage
+                        message="Uh oh! One of the dependencies of the app seems to be down
+                                😢. Please try again later."
+                    />
+                )}
             </main>
             <footer>
-                {game.supported && !isApple && (
+                {!game.error && game.supported && !isApple && (
                     <button
                         className="underline mb-8 hover:text-blue-300"
                         onClick={() => {

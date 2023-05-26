@@ -23,6 +23,7 @@ type Game = {
     loading: boolean;
     settings: Settings;
     supported: boolean;
+    error: boolean;
     startGame: () => void;
     newWord: () => void;
     playWord: () => void;
@@ -38,8 +39,9 @@ export const GameContext = React.createContext<Game>({
     gameStarted: false,
     voices: [],
     loading: false,
-    settings: { wordLength: [3, 10], voiceIndex: 0, speed: 0.8 },
+    settings: { wordLength: [4, 10], voiceIndex: 0, speed: 1 },
     supported: true,
+    error: false,
     startGame: () => {},
     newWord: () => {},
     playWord: () => {},
@@ -65,6 +67,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
               };
     });
     const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
     const { speak, speaking, supported, voices } = useSpeechSynthesis();
 
     const newWordHandler = async (): Promise<void> => {
@@ -80,6 +83,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
             const data = response.data;
             setWord(data[0]);
         } catch (error) {
+            setError(true);
             console.error("Error:", error);
         }
     };
@@ -133,6 +137,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
         loading,
         settings,
         supported,
+        error,
         startGame: gameStartHandler,
         newWord: newWordHandler,
         playWord: playHandler,
