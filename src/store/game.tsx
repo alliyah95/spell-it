@@ -86,7 +86,6 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
             setWord(data[0]);
         } catch (error) {
             setError(true);
-            console.error("Error:", error);
         }
     };
 
