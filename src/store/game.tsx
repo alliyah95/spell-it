@@ -27,6 +27,7 @@ type Game = {
     startGame: () => void;
     newWord: () => void;
     playWord: () => void;
+    pass: () => void;
     checkAnswer: (answer: string) => boolean;
     modifySettings: (setting: Setting) => void;
 };
@@ -45,6 +46,7 @@ export const GameContext = React.createContext<Game>({
     startGame: () => {},
     newWord: () => {},
     playWord: () => {},
+    pass: () => {},
     checkAnswer: () => true,
     modifySettings: () => {},
 });
@@ -89,11 +91,14 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     };
 
     const playHandler = (): void => {
+        if (!word) return;
+
         speak({
             text: word,
             rate: settings.speed,
             voice: voices[settings.voiceIndex],
         });
+
         if (word) {
             setWordPlayed(true);
         }
@@ -127,6 +132,10 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
         });
     };
 
+    const passHandler = (): void => {
+        setWord("");
+    };
+
     const gameContextvalue: Game = {
         score,
         word,
@@ -141,6 +150,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
         startGame: gameStartHandler,
         newWord: newWordHandler,
         playWord: playHandler,
+        pass: passHandler,
         checkAnswer: answerHandler,
         modifySettings: settingsHandler,
     };

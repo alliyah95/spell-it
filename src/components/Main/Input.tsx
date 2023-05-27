@@ -36,6 +36,7 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
 
     const passHandler = (): void => {
         if (game.gameStarted) {
+            game.pass();
             answerRef.current!.value = "";
             answerRef.current?.focus();
             onCheck("The correct answer was " + game.word);
@@ -72,6 +73,7 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
                     data-tooltip-content="Start first!"
                     data-tooltip-place="top"
                     onClick={passHandler}
+                    disabled={!game.word}
                 >
                     Pass
                 </button>
