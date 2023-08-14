@@ -10,7 +10,7 @@ import {
     ThemeToggleButton,
     Title,
     ErrorMessage,
-} from "./components/index";
+} from "./components";
 
 const App: React.FC = () => {
     const [status, setStatus] = useState<string>("Type your answers here 👇");
