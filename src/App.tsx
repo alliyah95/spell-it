@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { GameContext } from "./store/game";
+import { GameContext } from "./store";
 import {
     Input,
     Settings,

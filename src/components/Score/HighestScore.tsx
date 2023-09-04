@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { HighestScoreContext } from "../../store/highest-score";
+import { HighestScoreContext } from "../../store";
 
 const Header: React.FC = () => {
     const highestScore = useContext(HighestScoreContext);

@@ -1,6 +1,5 @@
 import React, { useContext, useRef, useEffect } from "react";
-import { GameContext } from "../../store/game";
-import { HighestScoreContext } from "../../store/highest-score";
+import { GameContext, HighestScoreContext } from "../../store";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 

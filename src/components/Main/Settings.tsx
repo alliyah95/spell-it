@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import CustomSlider from "../UI/CustomSlider";
 import Voices from "./Voices";
-import { GameContext } from "../../store/game";
+import { GameContext } from "../../store";
 import { BsXLg } from "react-icons/bs";
 
 interface SettingsProps {

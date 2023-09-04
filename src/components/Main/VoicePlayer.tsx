@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { BsArrowClockwise, BsVolumeUpFill } from "react-icons/bs";
-import { GameContext } from "../../store/game";
+import { GameContext } from "../../store";
 import Spinner from "../UI/Spinner";
 
 const VoicePlayer: React.FC<{ onStart: () => void }> = ({ onStart }) => {
