@@ -99,13 +99,9 @@ const App: React.FC = () => {
                 )}
 
                 <p>
-                    Made with 💙 by{" "}
-                    <a
-                        href="https://github.com/alliyah95"
-                        target="_blank"
-                        className="dev-info"
-                    >
-                        Alliyah Joyce Sarip
+                    Made with ☕ by{" "}
+                    <a href="#" target="_blank" className="dev-info">
+                        CASTRO | DIZON | SARIP | SORIANO | CS - 402
                     </a>
                 </p>
             </footer>
