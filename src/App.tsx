@@ -23,6 +23,7 @@ const App: React.FC = () => {
     useEffect(() => {
         const userAgent = window.navigator.userAgent;
         const isIOS =
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
         const isMac = /Macintosh/.test(userAgent);
 

@@ -7,7 +7,7 @@ type Theme = {
 
 export const ThemeContext = React.createContext<Theme>({
     mode: "",
-    toggleTheme: () => {},
+    toggleTheme: () => undefined,
 });
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = (

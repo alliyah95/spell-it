@@ -43,12 +43,12 @@ export const GameContext = React.createContext<Game>({
     settings: { wordLength: [4, 10], voiceIndex: 0, speed: 1 },
     supported: true,
     error: false,
-    startGame: () => {},
-    newWord: () => {},
-    playWord: () => {},
-    pass: () => {},
+    startGame: () => undefined,
+    newWord: () => undefined,
+    playWord: () => undefined,
+    pass: () => undefined,
     checkAnswer: () => true,
-    modifySettings: () => {},
+    modifySettings: () => undefined,
 });
 
 export const GameProvider: React.FC<{ children: React.ReactNode }> = (
@@ -106,6 +106,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = (
     // whenever the word changes, automatically play it
     useEffect(() => {
         playHandler();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [word]);
 
     const answerHandler = (answer: string): boolean => {

@@ -7,7 +7,7 @@ type HighestScore = {
 
 export const HighestScoreContext = React.createContext<HighestScore>({
     value: 0,
-    setNewHighestScore: () => {},
+    setNewHighestScore: () => undefined,
 });
 
 export const HighestScoreProvider: React.FC<{ children: React.ReactNode }> = (

@@ -12,7 +12,7 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
         if (game.score > highestScore.value) {
             highestScore.setNewHighestScore(game.score);
         }
-    }, [game.score, highestScore.value]);
+    }, [game.score, highestScore, highestScore.value]);
 
     const checkHandler = (evt: React.FormEvent): void => {
         evt.preventDefault();
@@ -36,6 +36,7 @@ const Input: React.FC<{ onCheck: (text: string) => void }> = ({ onCheck }) => {
     const passHandler = (): void => {
         if (game.gameStarted) {
             game.pass();
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             answerRef.current!.value = "";
             answerRef.current?.focus();
             onCheck("The correct answer was " + game.word);
